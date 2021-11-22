@@ -8,7 +8,7 @@ const plansSignSchema = joi.object({
     city: joi.string().required(),
     state: joi.string().required(),
     type: joi.string().valid('Monthly', 'Weekly').required(),
-    day: joi.string().valid('Dia 01', 'Dia 10', 'Dia 20').required(),
+    day: joi.string().valid('Dia 01', 'Dia 10', 'Dia 20', 'Monday', 'Wednesday', 'Friday').required(),
     items: joi.array().items(joi.string().valid('Chás', 'Incensos', 'Produtos organicos')).required(),
 });
 
