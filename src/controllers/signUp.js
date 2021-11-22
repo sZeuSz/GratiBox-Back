@@ -19,15 +19,15 @@ export default async function signUpUser(req, res) {
         const existEmail = await connection.query('SELECT * FROM users WHERE email = $1', [email]);
 
         if (existEmail.rowCount) {
-            return res.status(409).send('Email in use');
+            return res.status(409).send({ message: 'Email in use' });
         }
 
         const passwordEncryted = bcrypt.hashSync(password, 12);
 
         await connection.query('INSERT INTO users (name, email, password) VALUES ($1, $2, $3)', [name, email, passwordEncryted]);
 
-        return res.status(201).send('created');
+        return res.status(201).send({ message: 'created' });
     } catch (erro) {
-        return res.sendStatus(500);
+        return res.status(500).send({ message: 'Ocorreu um erro inesperado, tente novamente' });
     }
 }
