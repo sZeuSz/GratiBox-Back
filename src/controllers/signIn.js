@@ -34,7 +34,7 @@ export default async function signInUser(req, res) {
         const Response = {
             name: user.rows[0]?.name,
             email,
-            token: jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '300s' }),
+            token: jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '3000s' }),
         };
 
         await connection.query('INSERT INTO sessions (user_id, token) VALUES ($1, $2)', [user.rows[0].id, Response.token]);
